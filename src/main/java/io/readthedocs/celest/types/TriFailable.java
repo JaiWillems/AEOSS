@@ -136,4 +136,29 @@ public class TriFailable<T> {
     public String getFailureReason() {
         return failureReason.orElse( "" );
     }
+
+    @Override
+    public String toString() {
+        return "TriFailable{" +
+                "state=" + state +
+                ", result=" + result +
+                ", warningReason=" + warningReason +
+                ", failureReason=" + failureReason +
+                '}';
+    }
+
+    @Override
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+        TriFailable<?> that = (TriFailable<?>) o;
+        return state == that.state && result.equals( that.result ) &&
+                warningReason.equals( that.warningReason ) &&
+                failureReason.equals( that.failureReason );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash( state, result, warningReason, failureReason );
+    }
 }
